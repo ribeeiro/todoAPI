@@ -1,0 +1,22 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "standard"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double", {"allowTemplateLiterals": true}],
+        "indent": ["error", 4],
+        "comma-spacing": ["error", {"before": false}],
+        "arrow-spacing":  "error",
+        "arrow-body-style": ["error", "as-needed"],
+        "require-await": "warn"
+    }
+}
