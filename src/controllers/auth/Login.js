@@ -3,8 +3,6 @@ const { isEmail } = require('validator').default;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-require('dotenv').config();
-
 module.exports = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -22,9 +20,10 @@ module.exports = async (req, res) => {
         email
       };
       const signOptions = {
-        expiresIn: '12h'
+        expiresIn: '12h',
+        algorithm: 'RS256'
       };
-      const token = await jwt.sign(payload, process.env.JWT_SECRET, signOptions);
+      const token = await jwt.sign(payload, process.env.JWT_PRIVATE_KEY, signOptions);
       res.status(200);
       res.json({ token });
     } else {
