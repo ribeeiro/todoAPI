@@ -12,8 +12,8 @@
     },
     "rules": {
         "semi": ["error", "always"],
-        "quotes": ["error", "double", {"allowTemplateLiterals": true}],
-        "indent": ["error", 4],
+        "quotes": ["error", "single", {"allowTemplateLiterals": true}],
+        "indent": ["error", 2],
         "comma-spacing": ["error", {"before": false}],
         "arrow-spacing":  "error",
         "arrow-body-style": ["error", "as-needed"],
