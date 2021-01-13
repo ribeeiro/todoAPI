@@ -7,7 +7,7 @@ exports.seed = function (knex) {
       const user = {
         name: 'Ribeir0o',
         email: 'Ribeir0o@mail.com',
-        password: await bcrypt.hash(pass, 10)
+        hash: await bcrypt.hash(pass, 10)
       };
       return knex('users').insert([
         user
