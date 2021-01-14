@@ -8,6 +8,7 @@ exports.getTodo = async (req, res) => {
 exports.postTodo = async (req, res) => {
   const userId = req.id;
   const { text } = req.body;
+  if (!text) return res.status(400).json({ status: 400, message: 'Sintaxe incorreta' });
   const data = {
     text,
     user_id: userId
