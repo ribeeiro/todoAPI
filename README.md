@@ -5,15 +5,43 @@
 
 ## Features
 
-<hr>
-
 - [x] CRUD de tarefas
 - [x] Notificação por email quando a tarefa estiver perto de expirar
 - [x] Autenticação com JWT
+      <br>
+
+## Rodando a aplicação
+
+#### Antes de começar você tem que ter instalado na sua maquina: [Git](https://git-scm.com) e [Node.js](https://nodejs.org/en/).
+
+1. Clonar o repositório
+   ```bash
+   git clone https://github.com/Ribeir0o/todoAPI.git
+   ```
+1. Entrar na pasta do projeto
+   ```bash
+   cd todoAPI
+   ```
+1. Instalar as dependências
+   ```bash
+   npm install
+   ```
+1. Rodar migrações
+   ```bash
+   npm run migrate
+   ```
+1. Rodar seed (Opcional)
+
+   ```bash
+   npm run seed
+   ```
+
+1. Startar server em modo de desenvolvimento
+   ```bash
+   npm run dev
+   ```
 
 ## Autenticação
-
-<hr>
 
 | Metodo | Endpoint     | Funcionalidade                               |
 | ------ | ------------ | -------------------------------------------- |
@@ -24,7 +52,6 @@
 
 ## Endpoints
 
-<hr>
 <br>
 
 #### Todos os endpoints abaixo precisam de autenticação
