@@ -7,10 +7,15 @@ exports.getTodo = async (req, res) => {
 
 exports.postTodo = async (req, res) => {
   const userId = req.id;
-  const { text } = req.body;
+  /* eslint-disable */
+  const { text, expires_at } = req.body;
+  const { year, month, day, hour, minute } = expires_at[0];
+  const expires_atDateTimeFormat = new Date(year, month - 1, day, hour, minute);
+  /* eslint-enable */
   if (!text) return res.status(400).json({ status: 400, message: 'Sintaxe incorreta' });
   const data = {
     text,
+    expires_at: expires_atDateTimeFormat,
     user_id: userId
   };
   try {

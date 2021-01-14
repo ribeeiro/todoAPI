@@ -8,6 +8,7 @@ exports.up = knex => knex.schema.createTable('Todo', table => {
     .inTable('users')
     .notNullable()
     .unsigned();
+  table.datetime('expires_at').notNullable();
   table.timestamps(true, true);
 });
 

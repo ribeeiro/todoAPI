@@ -14,6 +14,13 @@ module.exports = {
     },
     seeds: {
       directory: './db/seeds'
+    },
+    pool: {
+      afterCreate: function (connection, callback) {
+        connection.query('SET time_zone = \'-03:00\';', function (err) {
+          callback(err, connection);
+        });
+      }
     }
   }
 };

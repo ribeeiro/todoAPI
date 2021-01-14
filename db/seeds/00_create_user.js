@@ -6,7 +6,7 @@ exports.seed = function (knex) {
       const pass = crypto.randomBytes(10).toString('hex');
       const user = {
         name: 'Ribeir0o',
-        email: 'Ribeir0o@mail.com',
+        email: 'mail@mail.com',
         hash: await bcrypt.hash(pass, 10)
       };
       return knex('users').insert([
