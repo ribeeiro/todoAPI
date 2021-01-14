@@ -3,10 +3,12 @@ const router = express.Router();
 // Middlewares
 const { validateJWT } = require('./middlewares');
 // Controllers
-const { getTodos } = require('./controllers/index');
+const { getTodo, postTodo } = require('./controllers/index');
 const postUser = require('./controllers/auth/Register');
 const postAuth = require('./controllers/auth/Login');
-router.get('/todos', validateJWT, getTodos);
+
+router.get('/todo', validateJWT, getTodo);
+router.post('/todo', validateJWT, postTodo);
 router.post('/user', postUser);
 router.post('/auth', postAuth);
 module.exports = router;
