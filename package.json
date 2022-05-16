@@ -30,7 +30,7 @@
     "knex": "^0.21.15",
     "mysql2": "^2.2.5",
     "node-cron": "^2.0.3",
-    "nodemailer": "^6.4.17",
+    "nodemailer": "^6.6.1",
     "validator": "^13.7.0"
   }
 }
