@@ -1,7 +1,11 @@
 const knex = require('../../db/index');
+
 exports.getTodo = async (req, res) => {
   const userId = req.id;
-  const todos = await knex.select('id', 'text').from('Todo').where({ user_id: userId });
+  const todos = await knex
+    .select('id', 'text')
+    .from('Todo')
+    .where({ user_id: userId });
   res.json({ Todo: todos });
 };
 
@@ -11,8 +15,8 @@ exports.postTodo = async (req, res) => {
   const { text, expires_at } = req.body;
   const { year, month, day, hour, minute } = expires_at[0];
   const expires_atDateTimeFormat = new Date(year, month - 1, day, hour, minute);
-  /* eslint-enable */
-  if (!text) return res.status(400).json({ status: 400, message: 'Sintaxe incorreta' });
+  if (!text)
+    return res.status(400).json({ status: 400, message: 'Sintaxe incorreta' });
   const data = {
     text,
     expires_at: expires_atDateTimeFormat,
@@ -34,36 +38,59 @@ exports.putTodo = async (req, res, next) => {
   const taskId = req.params.id;
   const { text } = req.body;
 
-  if (!text) return res.status(400).json({ status: 400, message: 'Sintaxe incorreta' });
-  if (isNaN(taskId)) return res.status(400).json({ status: 400, message: 'O id tem que ser um numero' });
+  if (!text)
+    return res.status(400).json({ status: 400, message: 'Sintaxe incorreta' });
+  if (isNaN(taskId))
+    return res
+      .status(400)
+      .json({ status: 400, message: 'O id tem que ser um numero' });
 
-  const task = await knex('Todo').select('*').where({ id: taskId, user_id: userId }).first();
-  if (!task) return res.status(404).json({ status: 404, message: 'Task nao encontrada' });
+  const task = await knex('Todo')
+    .select('*')
+    .where({ id: taskId, user_id: userId })
+    .first();
+  if (!task)
+    return res
+      .status(404)
+      .json({ status: 404, message: 'Task nao encontrada' });
 
   try {
     await knex('Todo').where(task).update({ text });
     res.status(200).json({ status: 200, message: 'Task alterada com sucesso' });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ status: 500, message: 'Erro interno, tente novamente.' });
+    res
+      .status(500)
+      .json({ status: 500, message: 'Erro interno, tente novamente.' });
   }
 };
 
-exports.deleteTodo = async (req, res, next) => {
+exports.deleteTodo = async (req, res) => {
   const userId = req.id;
   const taskId = req.params.id;
 
-  if (isNaN(taskId)) return res.status(400).json({ status: 400, message: 'O id tem que ser um numero' });
+  if (isNaN(taskId))
+    return res
+      .status(400)
+      .json({ status: 400, message: 'O id tem que ser um numero' });
 
-  const task = await knex('Todo').select().where({ id: taskId, user_id: userId }).first();
+  const task = await knex('Todo')
+    .select()
+    .where({ id: taskId, user_id: userId })
+    .first();
 
-  if (!task) return res.status(404).json({ status: 404, message: 'Task nao encontrada' });
+  if (!task)
+    return res
+      .status(404)
+      .json({ status: 404, message: 'Task nao encontrada' });
 
   try {
     await knex('Todo').where(task).del();
     res.status(200).json({ status: 200, message: 'task deletada com sucesso' });
   } catch (err) {
     console.trace(err);
-    res.status(500).json({ status: 500, message: 'erro interno, tente novamente' });
+    res
+      .status(500)
+      .json({ status: 500, message: 'erro interno, tente novamente' });
   }
 };

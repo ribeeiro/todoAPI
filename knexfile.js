@@ -1,7 +1,7 @@
 // Update with your config settings.
 require('dotenv').config();
-module.exports = {
 
+module.exports = {
   development: {
     client: 'mysql2',
     connection: {
@@ -16,8 +16,8 @@ module.exports = {
       directory: './db/seeds'
     },
     pool: {
-      afterCreate: function (connection, callback) {
-        connection.query('SET time_zone = \'-03:00\';', function (err) {
+      afterCreate(connection, callback) {
+        connection.query("SET time_zone = '-03:00';", (err) => {
           callback(err, connection);
         });
       }

@@ -1,9 +1,15 @@
 const express = require('express');
+
 const router = express.Router();
 // Middlewares
 const { validateJWT } = require('./middlewares');
 // Controllers
-const { getTodo, postTodo, putTodo, deleteTodo } = require('./controllers/index');
+const {
+  getTodo,
+  postTodo,
+  putTodo,
+  deleteTodo
+} = require('./controllers/index');
 const postUser = require('./controllers/auth/Register');
 const postAuth = require('./controllers/auth/Login');
 

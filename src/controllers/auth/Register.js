@@ -1,11 +1,14 @@
-const knex = require('../../../db/index');
 const bcrypt = require('bcryptjs');
+const knex = require('../../../db/index');
+
 module.exports = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-      res.status(400).json({ status: 400, message: 'Nenhum campo pode estar vazio' });
+      res
+        .status(400)
+        .json({ status: 400, message: 'Nenhum campo pode estar vazio' });
     } else {
       const hash = await bcrypt.hash(password, 10);
       const data = { name, email, hash };
@@ -15,6 +18,9 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     res.status(500);
-    res.json({ status: 500, message: 'Erro interno do servidor, tente novamente mais tarde' });
+    res.json({
+      status: 500,
+      message: 'Erro interno do servidor, tente novamente mais tarde'
+    });
   }
 };
