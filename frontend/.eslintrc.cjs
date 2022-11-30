@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
   root: true,
+  ignorePatterns: ['vite-env.d.ts'],
   rules: {
     'prettier/prettier': 'error',
     'no-shadow': 'off',
@@ -26,6 +27,7 @@ module.exports = {
     '@typescript-eslint/semi': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn'
+    'react-hooks/exhaustive-deps': 'warn',
+    '@typescript-eslint/member-delimiter-style': 'off'
   }
 };
