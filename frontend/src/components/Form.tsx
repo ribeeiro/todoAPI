@@ -1,12 +1,10 @@
 import Input from './Input';
 import styled from 'styled-components';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@tanstack/react-query';
-import { Inputs, User } from '../@types/global-types';
-import signUpSchema from '../schemas/signUpSchema';
-import api from '../lib/axios';
-import { AxiosResponse } from 'axios';
+import { FormProps } from '../@types/global-types';
+import { Fragment } from 'react';
 
 const StyledForm = styled.form`
   label {
@@ -24,25 +22,24 @@ const StyledForm = styled.form`
   }
 `;
 
-function Form({ className }: { className?: string }) {
+// eslint-disable-next-line prettier/prettier
+function Form({ className, formFields, buttonLabel, mutationFn, formSchema }: FormProps) {
   const {
     register,
     handleSubmit
     // formState: { errors }
-  } = useForm<Inputs>({
-    resolver: yupResolver(signUpSchema),
+  } = useForm({
+    resolver: yupResolver(formSchema),
     mode: 'onChange',
     reValidateMode: 'onSubmit'
   });
 
   const mutation = useMutation({
-    mutationFn: async (user: User): Promise<AxiosResponse> => {
-      return await api.createUser(user);
-    }
+    mutationFn
   });
 
-  const onSubmit: SubmitHandler<Inputs> = ({ email, name, password }: User) => {
-    mutation.mutate({ email, name, password });
+  const onSubmit: SubmitHandler<FieldValues> = (info: FieldValues) => {
+    mutation.mutate({ ...info });
   };
 
   return (
@@ -51,29 +48,17 @@ function Form({ className }: { className?: string }) {
       onSubmit={handleSubmit(onSubmit)}
       className={className}
     >
-      <label htmlFor="name">Nome:</label>
-      <Input
-        id="name"
-        {...register('name')}
-      />
-      <label htmlFor="email">Email:</label>
-      <Input
-        id="email"
-        {...register('email')}
-      />
-      <label htmlFor="password">Senha:</label>
-      <Input
-        type="password"
-        id="password"
-        {...register('password')}
-      />
-      <label htmlFor="confirmPassword">Confirme a senha:</label>
-      <Input
-        type="password"
-        id="confirmPassword"
-        {...register('confirmPassword')}
-      />
-      <button type="submit"> Criar Conta </button>
+      {formFields.map((field) => (
+        <Fragment key={field.id}>
+          <label htmlFor={field.id}>{field.label}:</label>
+          <Input
+            id={field.id}
+            type={field.type}
+            {...register(field.id)}
+          />
+        </Fragment>
+      ))}
+      <button type="submit"> {buttonLabel} </button>
     </StyledForm>
   );
 }

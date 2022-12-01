@@ -4,7 +4,6 @@ const knex = require('../../../db/index');
 module.exports = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
     if (!name || !email || !password) {
       res
         .status(400)
@@ -17,6 +16,7 @@ module.exports = async (req, res) => {
       res.json({ status: 201, message: 'Usuario criado com sucesso' });
     }
   } catch (err) {
+    // TODO: catch duplicate email error
     res.status(500);
     res.json({
       status: 500,
