@@ -1,17 +1,15 @@
 import { HTMLInputTypeAttribute } from 'react';
 
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
-export type Inputs = {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword?: string;
-};
 
 export type User = {
   name: string;
   email: string;
   password: string;
+};
+
+export type Inputs = User & {
+  confirmPassword: string;
 };
 
 export type Field = {

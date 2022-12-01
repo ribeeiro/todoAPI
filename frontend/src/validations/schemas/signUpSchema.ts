@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export default yup.object().shape({
+export const signUpSchema = yup.object().shape({
   name: yup.string().required('O campo "nome" é obrigatório!'),
   email: yup
     .string()

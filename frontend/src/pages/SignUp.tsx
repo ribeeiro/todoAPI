@@ -3,7 +3,7 @@ import Form from '../components/Form';
 import { Field, User } from '../@types/global-types';
 import { AxiosResponse } from 'axios';
 import api from '../lib/axios';
-import signUpSchema from '../schemas/signUpSchema';
+import { signUpSchema } from '../validations';
 
 function SignUp() {
   const formFields: Field[] = [
