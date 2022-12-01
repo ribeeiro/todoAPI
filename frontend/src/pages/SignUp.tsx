@@ -2,7 +2,7 @@ import AppContainer from '../components/AppContainer';
 import Form from '../components/Form';
 import { Field, User } from '../@types/global-types';
 import { AxiosResponse } from 'axios';
-import api from '../lib/axios';
+import { createUser } from '../lib/axios';
 import { signUpSchema } from '../validations';
 
 function SignUp() {
@@ -14,7 +14,7 @@ function SignUp() {
   ];
   const mutationFn = async (user: User): Promise<AxiosResponse> => {
     // eslint-disable-next-line @typescript-eslint/return-await
-    return await api.createUser(user);
+    return await createUser(user);
   };
   return (
     <AppContainer>

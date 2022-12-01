@@ -8,10 +8,6 @@ export type User = {
   password: string;
 };
 
-export type Inputs = User & {
-  confirmPassword: string;
-};
-
 export type Field = {
   id: 'name' | 'email' | 'password' | 'confirmPassword';
   label: string;

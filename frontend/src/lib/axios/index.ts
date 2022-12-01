@@ -5,8 +5,10 @@ const instance = axios.create({
   baseURL: 'https://api.example.com'
 });
 
-export default {
-  createUser: async (user: User) => {
-    return await instance.post('/user', { ...user });
-  }
+export const createUser = async (user: User) => {
+  return await instance.post('/user', { ...user });
+};
+
+export const auth = async (user: Omit<User, 'name'>) => {
+  return await instance.post('/login', { ...user });
 };
